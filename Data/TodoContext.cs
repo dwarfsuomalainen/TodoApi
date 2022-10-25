@@ -6,7 +6,7 @@ namespace TodoApi.Data
 {
     public class TodoContext: DbContext, ITodoContext
     {
-        public TodoContext(DbContextOptions<TodoContext> options): base(options);
+        public TodoContext(DbContextOptions<TodoContext> options) : base(options);
     }
     public DbSet<Todo> Todos {get; init;}
 }
