@@ -1,16 +1,12 @@
-using System.Threading;
-using System.Threading.Tasks;
+
 using Microsoft.EntityFrameworkCore;
 using TodoApi.Models;
-
-
-
+ 
 namespace TodoApi.Data
 {
-    public interface TodoContext
+    public class TodoContext: DbContext, ITodoContext
     {
-        DbSet<Todo> Todos {get; init;}
-
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+        public TodoContext(DbContextOptions<TodoContext> options): base(options);
     }
+    public DbSet<Todo> Todos {get; init;}
 }
