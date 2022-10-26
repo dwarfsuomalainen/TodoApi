@@ -9,7 +9,7 @@ services:
               - POSTGRES_PASSWORD=roma1234
               - POSTGRES_DB=todoDb
           ports:
-              - "5433:5433"
+              - "5433:5432"
           restart: always
           volumes:
               - database-data:/var/lib/postgresql/data/
