@@ -63,7 +63,7 @@ namespace TodoApi.Controllers
     {
         Todo todo = new()
         {
-        TodoId = updateTodoDto.TodoId,
+        TodoId = id,
         NameTodo = updateTodoDto.NameTodo,
         Description = updateTodoDto.Description,
         DateUpdated = updateTodoDto.DateUpdated,
