@@ -2,6 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TodoApi.Models;
+using TodoApi.Repositories;
 
 namespace TodoApi.Data
 {
