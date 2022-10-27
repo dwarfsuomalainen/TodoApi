@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using TodoApi.Data;
 using TodoApi.Models;
 
@@ -24,22 +25,34 @@ namespace TodoApi.Repositories
 
         public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var todoToDelete = await _context.Todos.FindAsync(id);
+            if (todoToDelete == null)
+                throw new NullReferenceException();
+            _context.Todos.Remove(todoToDelete);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<Todo> Get(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Todos.FindAsync(id);
         }
 
         public async Task<IEnumerable<Todo>> GetAll()
         {
-            throw new NotImplementedException();
+           return await _context.Todos.ToListAsync(); 
         }
 
         public async Task Update(Todo todo)
         {
-            throw new NotImplementedException();
+            var todoToUpdate = await _context.Todos.FindAsync(todo.TodoId);
+            if (todoToUpdate == null)
+                throw new NullReferenceException();
+
+            todoToUpdate.NameTodo = todo.NameTodo;
+            todoToUpdate.Description = todo.Description;
+            todoToUpdate.DateUpdated = todo.DateUpdated;
+            todoToUpdate.Status = todo.Status;
+            await _context.SaveChangesAsync();
         }
     }
 }
