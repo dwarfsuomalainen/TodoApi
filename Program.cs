@@ -16,6 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<TodoContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<ITodoRepository, TodoRepository>();
+builder.Services.AddControllers();
 //builder.Services.AddScoped<TodoContext>(provider => provider.GetService<TodoContext>());
 var app = builder.Build();
 
