@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using TodoApi.Data;
 using TodoApi.Models;
 using TodoApi.Repositories;
-
+using Microsoft.AspNetCore.Mvc.Versioning;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,9 +15,23 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<TodoContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<ITodoContext>(provider => provider.GetService<TodoContext>());
 builder.Services.AddScoped<ITodoRepository, TodoRepository>();
+        builder.Services.AddApiVersioning(options =>
+        {
+            options.AssumeDefaultVersionWhenUnspecified = true;
+            options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+            options.ReportApiVersions = true;
+            options.ApiVersionReader = new UrlSegmentApiVersionReader();
+        });
+
+        builder.Services.AddVersionedApiExplorer(setup =>
+        {
+            setup.GroupNameFormat = "'v'VVV";
+            setup.SubstituteApiVersionInUrl = true;
+        });
 builder.Services.AddControllers();
-//builder.Services.AddScoped<TodoContext>(provider => provider.GetService<TodoContext>());
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

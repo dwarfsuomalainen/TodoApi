@@ -1,3 +1,4 @@
+/*
 
 using TodoApi.Models.Auth;
 using TodoApi.Services;
@@ -42,3 +43,4 @@ public class AuthController : ControllerBase
         return new OkResult();
     }
 }
+*/

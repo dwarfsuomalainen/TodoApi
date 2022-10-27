@@ -11,7 +11,7 @@ namespace TodoApi.Repositories
     public class TodoRepository : ITodoRepository
     {
         private readonly ITodoContext _context;
-        public TodoRepository(TodoContext context) 
+        public TodoRepository(ITodoContext context) 
         {
             _context = context;
         }

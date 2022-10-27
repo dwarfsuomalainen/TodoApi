@@ -4,10 +4,12 @@ using TodoApi.Models;
 using TodoApi.Repositories;
 using TodoApi.Dto;
 
-namespace TodoApi.Controllers
+namespace TodoApi.Controllers.v1
 {
     [ApiController]
-    [Route("[controller]")]
+    //[Authorize]
+    [Route("api/v{version:apiVersion}/todos")]
+    [ApiVersion("1")]
     public class TodoController: ControllerBase 
     {
         private readonly ITodoRepository _todoRepository;
