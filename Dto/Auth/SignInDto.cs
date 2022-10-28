@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TodoApi.Models.Auth
+namespace TodoApi.Dto.Auth
 {
-    public class SignInModel
+    public class SignInDto
     {
            public string Email { get; set; } = "";
            public string Password { get; set; } = ""; 

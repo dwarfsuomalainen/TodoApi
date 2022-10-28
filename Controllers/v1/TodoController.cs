@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TodoApi.Models;
-using TodoApi.Repositories;
+using TodoApi.Services;
 using TodoApi.Dto;
+
 
 namespace TodoApi.Controllers.v1
 {
@@ -12,16 +13,16 @@ namespace TodoApi.Controllers.v1
     [ApiVersion("1")]
     public class TodoController: ControllerBase 
     {
-        private readonly ITodoRepository _todoRepository;
+        private readonly ITodoService _todoService;
 
-        public TodoController(ITodoRepository todoRepository)
+        public TodoController(ITodoService todoService)
         {
-           _todoRepository = todoRepository; 
+           _todoService = todoService; 
         }
-    [HttpGet("{id}")]
+    [HttpGet("{id}")]    
     public async Task<ActionResult<Todo>> GetTodo(int id)
     {
-        var todo = await _todoRepository.Get(id);
+        var todo = await _todoService.GetTodo(id);
         if(todo == null)
             return NotFound();
         
@@ -31,45 +32,28 @@ namespace TodoApi.Controllers.v1
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Todo>>> GetTodos()
     {
-        var todos = await _todoRepository.GetAll();
+        var todos = await _todoService.GetTodos();
         return Ok(todos);
     }
     [HttpPost]
 
     public async Task<ActionResult> CreateTodo(CreateTodoDto createTodoDto)
     {
-        var todo = new Todo
-        {
-        NameTodo = createTodoDto.NameTodo,
-        Description = createTodoDto.Description,
-        UserId = createTodoDto.UserId,
-        DateCreated = createTodoDto.DateCreated,
-        Status = createTodoDto.Status
-        };
-        await _todoRepository.Add(todo);
+        await _todoService.CreateTodo(createTodoDto);
         return Ok();
     }
 
     [HttpDelete]
     public async Task<ActionResult> DeleteTodo(int id)
     {
-        await _todoRepository.Delete(id);
+        await _todoService.DeleteTodo(id);
         return Ok();
     }
 
     [HttpPut("{id}")]
     public async Task<ActionResult> UpdateTodo(int id, UpdateTodoDto updateTodoDto)
     {
-        Todo todo = new()
-        {
-        TodoId = id,
-        NameTodo = updateTodoDto.NameTodo,
-        Description = updateTodoDto.Description,
-        DateUpdated = updateTodoDto.DateUpdated,
-        Status = updateTodoDto.Status
-        };
-
-        await _todoRepository.Update(todo);
+        await _todoService.UpdateTodo(id, updateTodoDto);
         return Ok();
 
     }

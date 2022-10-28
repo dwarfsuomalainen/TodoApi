@@ -5,6 +5,8 @@ using TodoApi.Data;
 using TodoApi.Models;
 using TodoApi.Repositories;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using TodoApi.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,8 +16,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddDbContext<TodoContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<ITodoContext>(provider => provider.GetService<TodoContext>());
+builder.Services.AddScoped<ITodoService, TodoService>();
 builder.Services.AddScoped<ITodoRepository, TodoRepository>();
         builder.Services.AddApiVersioning(options =>
         {
