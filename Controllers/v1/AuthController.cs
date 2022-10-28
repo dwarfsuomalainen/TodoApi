@@ -1,11 +1,9 @@
-/*
-
-using TodoApi.Models.Auth;
+using TodoApi.Dto.Auth;
 using TodoApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespaceTodoApi.Controllers.v1;
+namespace TodoApi.Controllers.v1;
 
 [ApiController]
 [Authorize]
@@ -22,25 +20,24 @@ public class AuthController : ControllerBase
 
     [HttpPost("SignUp")]
     [AllowAnonymous]
-    public IActionResult SignUp(SignUpModel payload)
+    public async Task<IActionResult> SignUp(SignUpDto payload)
     {
-        _authService.SignUp(payload);
+        await _authService.SignUp(payload);
         return new OkResult();
     }
 
     [HttpPost("SignIn")]
     [AllowAnonymous]
-    public IActionResult SignIn(SignInModel payload)
+    public async Task<IActionResult> SignIn(SignInDto payload)
     {
-        var token = _authService.SignIn(payload);
+        var token =await  _authService.SignIn(payload);
         return new OkObjectResult(token);
     }
 
     [HttpPost("ChangePassword")]
-    public IActionResult ChangePassword(ChangePasswordModel payload)
+    public async Task<IActionResult> ChangePassword(ChangePasswordDto payload)
     {
-        _authService.ChangePassword(payload);
+        await _authService.ChangePassword(payload);
         return new OkResult();
     }
 }
-*/
