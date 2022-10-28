@@ -7,6 +7,7 @@ namespace TodoApi.Models
 {
     public class Todo
     {
+        //public Guid Id {get; set;} = Guid.NewGuid();
         public int TodoId {get; set;}
         public string NameTodo {get; set;}
         public string Description {get; set;}

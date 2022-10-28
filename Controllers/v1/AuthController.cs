@@ -5,7 +5,7 @@ using TodoApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DotNetApi.Controllers.v1;
+namespaceTodoApi.Controllers.v1;
 
 [ApiController]
 [Authorize]

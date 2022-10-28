@@ -54,7 +54,7 @@ namespace TodoApi.Migrations
 
                     b.HasKey("TodoId");
 
-                    b.ToTable("Todos");
+                    b.ToTable("Todos", (string)null);
                 });
 #pragma warning restore 612, 618
         }
