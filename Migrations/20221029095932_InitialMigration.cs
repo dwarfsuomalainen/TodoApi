@@ -27,12 +27,31 @@ namespace TodoApi.Migrations
                 {
                     table.PrimaryKey("PK_Todos", x => x.TodoId);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserEmail = table.Column<string>(type: "text", nullable: false),
+                    UserPassword = table.Column<string>(type: "text", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.UserId);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Todos");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }

@@ -10,5 +10,7 @@ namespace TodoApi.Data
     {
         DbSet<Todo>?Todos { get; init; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+
+        DbSet<User> Users {get; init; }
     }
 }
