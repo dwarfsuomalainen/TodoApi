@@ -8,7 +8,7 @@ using TodoApi.Data;
 
 namespace TodoApi.Repositories
 {
-    public abstract class BaseRepositiory<T> : IBaseRepository<T> where T : Base
+    public abstract class BaseRepository<T> : IBaseRepository<T> where T : Base
     {
             protected readonly DbSet<T> _dbSet;
 

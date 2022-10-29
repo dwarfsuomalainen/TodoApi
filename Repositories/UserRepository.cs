@@ -7,7 +7,7 @@ using TodoApi.Data;
 
 namespace TodoApi.Repositories
 {
-    public class UserRepository : BaseRepositiory<User>, IUserRepository
+    public class UserRepository : BaseRepository<User>, IUserRepository
     {
        public UserRepository(TodoContext dbContext) : base(dbContext) { }
 
