@@ -30,7 +30,7 @@ public class AuthController : ControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> SignIn(SignInDto payload)
     {
-        var token =await  _authService.SignIn(payload);
+        var token = await _authService.SignIn(payload);
         return new OkObjectResult(token);
     }
 

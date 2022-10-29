@@ -11,7 +11,7 @@ namespace TodoApi.Repositories
         Task<Todo> Get(int id);
         Task<IEnumerable<Todo>> GetAll();
         Task Add(Todo todo);
-        Task Delete (int id);
+        Task Delete(int id);
         Task Update(Todo todo);
     }
 }

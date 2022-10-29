@@ -11,7 +11,7 @@ namespace TodoApi.Repositories
     public class TodoRepository : ITodoRepository
     {
         private readonly ITodoContext _context;
-        public TodoRepository(ITodoContext context) 
+        public TodoRepository(ITodoContext context)
         {
             _context = context;
         }
@@ -37,7 +37,7 @@ namespace TodoApi.Repositories
 
         public async Task<IEnumerable<Todo>> GetAll()
         {
-           return await _context.Todos.ToListAsync(); 
+            return await _context.Todos.ToListAsync();
         }
 
         public async Task Update(Todo todo)

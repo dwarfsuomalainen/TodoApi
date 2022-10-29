@@ -21,10 +21,10 @@ builder.Services.AddAuthentication(options =>
             options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
         }).AddJwtBearer(options =>
         {
-options.TokenValidationParameters = new TokenValidationParameters
+            options.TokenValidationParameters = new TokenValidationParameters
             {
                 ValidIssuer = builder.Configuration["Jwt:Issuer"],
-                ValidAudience =  builder.Configuration["Jwt:Audience"],
+                ValidAudience = builder.Configuration["Jwt:Audience"],
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
                 ValidateIssuer = true,
                 ValidateAudience = true,
@@ -41,32 +41,32 @@ builder.Services.AddScoped<ITodoService, TodoService>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 
-        
+
 builder.Services.AddApiVersioning(options =>
-        {
-            options.AssumeDefaultVersionWhenUnspecified = true;
-            options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
-            options.ReportApiVersions = true;
-            options.ApiVersionReader = new UrlSegmentApiVersionReader();
-        });
+{
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+    options.ReportApiVersions = true;
+    options.ApiVersionReader = new UrlSegmentApiVersionReader();
+});
 
-        builder.Services.AddVersionedApiExplorer(setup =>
-        {
-            setup.GroupNameFormat = "'v'VVV";
-            setup.SubstituteApiVersionInUrl = true;
-        });
+builder.Services.AddVersionedApiExplorer(setup =>
+{
+    setup.GroupNameFormat = "'v'VVV";
+    setup.SubstituteApiVersionInUrl = true;
+});
 builder.Services.AddEndpointsApiExplorer();
-        var securityScheme = new OpenApiSecurityScheme()
-        {
-            Name = "Authorization",
-            Type = SecuritySchemeType.ApiKey,
-            Scheme = "Bearer",
-            BearerFormat = "JWT",
-            In = ParameterLocation.Header,
-            Description = "JSON Web Token based security",
-        };
+var securityScheme = new OpenApiSecurityScheme()
+{
+    Name = "Authorization",
+    Type = SecuritySchemeType.ApiKey,
+    Scheme = "Bearer",
+    BearerFormat = "JWT",
+    In = ParameterLocation.Header,
+    Description = "JSON Web Token based security",
+};
 
-        var securityRequirement = new OpenApiSecurityRequirement()
+var securityRequirement = new OpenApiSecurityRequirement()
         {
             {
                 new OpenApiSecurityScheme
@@ -81,11 +81,11 @@ builder.Services.AddEndpointsApiExplorer();
             }
         };
 
-        builder.Services.AddSwaggerGen(options =>
-        {
-            options.AddSecurityDefinition("Bearer", securityScheme);
-            options.AddSecurityRequirement(securityRequirement);
-        });
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition("Bearer", securityScheme);
+    options.AddSecurityRequirement(securityRequirement);
+});
 
 var app = builder.Build();
 
