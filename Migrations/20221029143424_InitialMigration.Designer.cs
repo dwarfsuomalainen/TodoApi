@@ -12,7 +12,7 @@ using TodoApi.Data;
 namespace TodoApi.Migrations
 {
     [DbContext(typeof(TodoContext))]
-    [Migration("20221029095932_InitialMigration")]
+    [Migration("20221029143424_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,23 +26,20 @@ namespace TodoApi.Migrations
 
             modelBuilder.Entity("TodoApi.Models.Todo", b =>
                 {
-                    b.Property<int>("TodoId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TodoId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("DateUpdated")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("NameTodo")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -50,40 +47,62 @@ namespace TodoApi.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("Updated")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("TodoId");
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Todos");
                 });
 
             modelBuilder.Entity("TodoApi.Models.User", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UserId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("DateCreated")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("DateUpdated")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("UserEmail")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("UserPassword")
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("UserId");
+                    b.Property<DateTime>("Updated")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("TodoApi.Models.Todo", b =>
+                {
+                    b.HasOne("TodoApi.Models.User", "User")
+                        .WithMany("Todos")
+                        .HasForeignKey("UserId1");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TodoApi.Models.User", b =>
+                {
+                    b.Navigation("Todos");
                 });
 #pragma warning restore 612, 618
         }

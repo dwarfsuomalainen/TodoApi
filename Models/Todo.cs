@@ -5,18 +5,13 @@ using System.Threading.Tasks;
 
 namespace TodoApi.Models
 {
-    public class Todo
+    public class Todo : Base
     {
-        //public Guid Id {get; set;} = Guid.NewGuid();
-        public int TodoId { get; set; }
-        public string NameTodo { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
-        public string UserId { get; set; }
-        public DateTime DateCreated { get; set; }
-        public DateTime DateUpdated { get; set; }
+        public int UserId { get; set; }
         public string Status { get; set; }
-
-
+        public virtual User? User { get; set; }
 
     }
 }

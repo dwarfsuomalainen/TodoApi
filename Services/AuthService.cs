@@ -38,7 +38,7 @@ namespace TodoApi.Services
                 new Claim("Id", Guid.NewGuid().ToString()),
                 //new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 //new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim(JwtRegisteredClaimNames.Sub, "user.Id.ToString"),
+                new Claim(JwtRegisteredClaimNames.Sub, "1"),
                 new Claim(JwtRegisteredClaimNames.Email, "user.Email"),
                 new Claim(JwtRegisteredClaimNames.Jti,
                 Guid.NewGuid().ToString())

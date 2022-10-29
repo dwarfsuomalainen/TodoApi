@@ -8,13 +8,10 @@ using TodoApi.Models;
 
 namespace TodoApi.Repositories
 {
-    public class TodoRepository : ITodoRepository
+    public class TodoRepository : BaseRepository<Todo>, ITodoRepository
     {
-        private readonly ITodoContext _context;
-        public TodoRepository(ITodoContext context)
-        {
-            _context = context;
-        }
+        
+        public TodoRepository(ITodoContext context) : base(context, context.Todos){}
         public async Task Add(Todo todo)
         {
             _context.Todos.Add(todo);
@@ -40,15 +37,20 @@ namespace TodoApi.Repositories
             return await _context.Todos.ToListAsync();
         }
 
+        public async Task<Todo?> GetByAuthId(int todoId, int userId)
+        {
+            return _dbSet.FirstOrDefault(x => x.UserId == userId  && x.Id == todoId);
+        }
+        
         public async Task Update(Todo todo)
         {
-            var todoToUpdate = await _context.Todos.FindAsync(todo.TodoId);
+            var todoToUpdate = await _context.Todos.FindAsync(todo.Id);
             if (todoToUpdate == null)
                 throw new NullReferenceException();
 
-            todoToUpdate.NameTodo = todo.NameTodo;
+            todoToUpdate.Name = todo.Name;
             todoToUpdate.Description = todo.Description;
-            todoToUpdate.DateUpdated = todo.DateUpdated;
+            todoToUpdate.Updated = todo.Updated;
             todoToUpdate.Status = todo.Status;
             await _context.SaveChangesAsync();
         }

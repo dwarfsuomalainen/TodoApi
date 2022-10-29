@@ -9,7 +9,7 @@ namespace TodoApi.Repositories
 {
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
-       public UserRepository(TodoContext dbContext) : base(dbContext) { }
+    public UserRepository(TodoContext dbContext) : base(dbContext, dbContext.Users) { }
 
     public User? FindByEmail(string email)
     {

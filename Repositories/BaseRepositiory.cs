@@ -11,30 +11,35 @@ namespace TodoApi.Repositories
     public abstract class BaseRepository<T> : IBaseRepository<T> where T : Base
     {
             protected readonly DbSet<T> _dbSet;
-
-    public BaseRepository(TodoContext dbContext)
+            protected readonly ITodoContext _context;
+    
+    public BaseRepository(ITodoContext dbContext, DbSet<T> dbSet)
     {
-        _dbSet = dbContext.Set<T>();
+        _context = dbContext;
+        _dbSet = dbSet;
     }
 
-    public IQueryable<T> GetAll()
+    public async Task<IQueryable<T>> GetAll()
     {
         return _dbSet.AsQueryable();
     }
 
-    public T? FindById(Id)
+    public async Task<T?> FindById(int Id)
     {
-        return _dbSet.FirstOrDefault(x => x.Id == id);
+        return _dbSet.FirstOrDefault(x => x.Id == Id);
     }
 
-    public void Add(T entity)
+    public async Task Add(T entity)
     {
         _dbSet.Add(entity);
+        await _context.SaveChangesAsync();
+
     }
 
-    public void Delete(T entity)
+    public async Task Delete(T entity)
     {
         _dbSet.Remove(entity);
+        await _context.SaveChangesAsync();
     }
     }
 }

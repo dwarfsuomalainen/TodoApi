@@ -11,9 +11,10 @@ namespace TodoApi.Repositories
 {
     public interface IBaseRepository<T> where T: Base
     {
-        T? FindById(Id);
-        void Add(T entity);
-        void Delete(T entity);
+        Task<IQueryable<T>> GetAll();
+        Task<T?> FindById(int Id);
+        Task Add(T entity);
+        Task Delete(T entity);
 
     }
 }

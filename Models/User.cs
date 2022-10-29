@@ -1,12 +1,9 @@
 namespace TodoApi.Models
 {
-    public class User
+    public class User : Base
     {
-
-        public int UserId { get; set; }
-        public string UserEmail { get; set; }
-        public string UserPassword { get; set; }
-        public DateTime DateCreated { get; set; }
-        public DateTime DateUpdated { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public virtual ICollection<Todo> Todos { get; set; } = new HashSet<Todo>();
     }
 }

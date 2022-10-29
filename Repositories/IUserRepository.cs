@@ -9,7 +9,7 @@ namespace TodoApi.Repositories
 {
     public interface IUserRepository : IBaseRepository<User>
     {
-    public User? FindByEmail(string email);
+    User? FindByEmail(string email);
 
     bool CheckIsUserExistByEmail(string email);
     }
