@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TodoApi.Enums;
 
 namespace TodoApi.Models
 {
@@ -10,7 +11,7 @@ namespace TodoApi.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public int UserId { get; set; }
-        public string Status { get; set; }
+        public TodoStatus Status { get; set; } = TodoStatus.NotStarted;
         public virtual User? User { get; set; }
 
     }

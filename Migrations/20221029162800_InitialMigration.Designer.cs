@@ -12,7 +12,7 @@ using TodoApi.Data;
 namespace TodoApi.Migrations
 {
     [DbContext(typeof(TodoContext))]
-    [Migration("20221029143424_InitialMigration")]
+    [Migration("20221029162800_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,23 +43,18 @@ namespace TodoApi.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("Updated")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int?>("UserId1")
+                    b.Property<int>("UserId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Todos");
                 });
@@ -95,7 +90,9 @@ namespace TodoApi.Migrations
                 {
                     b.HasOne("TodoApi.Models.User", "User")
                         .WithMany("Todos")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });

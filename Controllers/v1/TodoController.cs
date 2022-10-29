@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using TodoApi.Models;
 using TodoApi.Services;
 using TodoApi.Dto;
-
+using TodoApi.Enums;
 
 namespace TodoApi.Controllers.v1
 {
     [ApiController]
-    //[Authorize]
+    [Authorize]
     [Route("api/v{version:apiVersion}/todos")]
     [ApiVersion("1")]
     public class TodoController : ControllerBase
@@ -19,7 +19,7 @@ namespace TodoApi.Controllers.v1
         {
             _todoService = todoService;
         }
-        [HttpGet("{id}")]
+        /*[HttpGet("{id}")]
         public async Task<ActionResult<Todo>> GetTodo(int id)
         {
             var todo = await _todoService.GetTodo(id);
@@ -28,11 +28,11 @@ namespace TodoApi.Controllers.v1
 
             return Ok(todo);
 
-        }
+        }*/
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Todo>>> GetTodos()
+        public async Task<ActionResult<IEnumerable<Todo>>> GetTodos(TodoStatus? status)
         {
-            var todos = await _todoService.GetTodos();
+            var todos = await _todoService.GetTodos(status);
             return Ok(todos);
         }
         [HttpPost]

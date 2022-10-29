@@ -33,11 +33,17 @@ builder.Services.AddAuthentication(options =>
             };
         });
 builder.Services.AddAuthorization();
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(opts =>
+{
+    var enumConverter = new JsonStringEnumConverter();
+    opts.JsonSerializerOptions.Converters.Add(enumConverter);
+});
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddDbContext<TodoContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<ITodoContext>(provider => provider.GetService<TodoContext>());
 builder.Services.AddScoped<ITodoRepository, TodoRepository>();
 builder.Services.AddScoped<ITodoService, TodoService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 

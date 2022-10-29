@@ -19,6 +19,16 @@ namespace TodoApi.Repositories
     public bool CheckIsUserExistByEmail(string email)
     {
         return this._dbSet.Any(user => user.Email == email.ToLower());
-    } 
+    }
+
+    public async Task UpdateUserPassword(int userId, string passwordHash) 
+    {
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null)
+                throw new Exception(); // - Custom exception needed!!!
+            user.Password = passwordHash;
+            user.Updated = DateTime.UtcNow; 
+            await _context.SaveChangesAsync();
+    }
     }
 }

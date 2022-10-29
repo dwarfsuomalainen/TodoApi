@@ -4,6 +4,7 @@ using TodoApi.Models;
 using TodoApi.Repositories;
 using TodoApi.Dto;
 using System.Security.Claims;
+using TodoApi.Enums;
 
 namespace TodoApi.Services
 {
@@ -18,33 +19,41 @@ namespace TodoApi.Services
             _todoRepository = todoRepository;
             _context = context;
         }
-        public async Task<Todo> GetTodo(int id)
+        /*public async Task<Todo> GetTodo(int id)
         {
             var todo = await _todoRepository.Get(id);
             return (todo);
 
-        }
-        public async Task<IEnumerable<Todo>> GetTodos()
+        }*/
+        public async Task<IEnumerable<Todo>> GetTodos(TodoStatus? status)
         {
-            var todos = await _todoRepository.GetAll();
+            var stringId = _context.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (stringId is null || !int.TryParse(stringId, out int userId)) throw new UnauthorizedAccessException();
+            var todos = await _todoRepository.GetTodos(userId, status);
             return (todos);
         }
 
         public async Task CreateTodo(CreateTodoDto createTodoDto)
         {
+            var stringId = _context.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (stringId is null || !int.TryParse(stringId, out int userId)) throw new UnauthorizedAccessException();
             var todo = new Todo
             {
                 Name = createTodoDto.NameTodo,
                 Description = createTodoDto.Description,
-                UserId = 1,
-                Created = DateTime.UtcNow,
-                Status = "enum"
+                UserId = userId
             };
             await _todoRepository.Add(todo);
         }
 
         public async Task DeleteTodo(int id)
         {
+            var stringId = _context.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (stringId is null || !int.TryParse(stringId, out int userId)) throw new UnauthorizedAccessException();
+
+            var todo = await _todoRepository.GetByAuthId(userId, id);
+            if (todo is null) throw new Exception(); // - Custom exception needed !!!
+
             await _todoRepository.Delete(id);
 
         }
@@ -52,7 +61,6 @@ namespace TodoApi.Services
         {
 
             var stringId = _context.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
             if (stringId is null || !int.TryParse(stringId, out int userId)) throw new UnauthorizedAccessException();
 
             var todo = await _todoRepository.GetByAuthId(userId, id);
@@ -62,6 +70,8 @@ namespace TodoApi.Services
             todo.Description = updateTodoDto.Description;
             todo.Status = updateTodoDto.Status;
             todo.Updated = DateTime.UtcNow;
+
+            await _todoRepository.Update(todo);
         }
 
     }

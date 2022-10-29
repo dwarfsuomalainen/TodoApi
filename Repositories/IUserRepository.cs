@@ -12,5 +12,7 @@ namespace TodoApi.Repositories
     User? FindByEmail(string email);
 
     bool CheckIsUserExistByEmail(string email);
+
+    Task UpdateUserPassword(int userId, string passwordHash); 
     }
 }

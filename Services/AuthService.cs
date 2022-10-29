@@ -9,59 +9,75 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using TodoApi.Dto.Auth;
 using TodoApi.Options;
+using TodoApi.Repositories;
+using TodoApi.Models;
 namespace TodoApi.Services
 {
-    public class AuthService: IAuthService
+    public class AuthService : IAuthService
     {
-     private readonly JwtOptions _jwtOptions;
-    public AuthService(
-        IOptions<JwtOptions> jwtOptions){
-        _jwtOptions = jwtOptions.Value;
-    }
-    public async Task SignUp(SignUpDto payload)
-    {
-        
-    }
-    public async Task<String>SignIn(SignInDto payload)
-    {
-         /*var user = _unitOfWork.Users.FindByEmail(payload.Email);
+        private readonly JwtOptions _jwtOptions;
+        private readonly IUserRepository _userRepository;
+        private readonly IHttpContextAccessor _context;
 
-        if (user is null || !BCrypt.Net.BCrypt.Verify(payload.Password, user.Password))
+        public AuthService(
+            IOptions<JwtOptions> jwtOptions, IUserRepository userRepository, IHttpContextAccessor context)
         {
-            throw new AuthorizationException("Email and/or password is incorrect");
-        }*/ 
-        
-        var tokenDescriptor = new SecurityTokenDescriptor
+            _jwtOptions = jwtOptions.Value;
+            _userRepository = userRepository;
+            _context = context;
+        }
+        public async Task SignUp(SignUpDto payload)
         {
-            Subject = new ClaimsIdentity(new[]
+            var userExist = _userRepository.CheckIsUserExistByEmail(payload.Email);
+            if (userExist) throw new Exception(); // - custom exception needed! 
+            await _userRepository.Add(new User { Email = payload.Email.ToLower(), Password = BCrypt.Net.BCrypt.HashPassword(payload.Password) }); // - !!!! Bcrypt 
+        }
+        public async Task<String> SignIn(SignInDto payload)
+        {
+            var user = _userRepository.FindByEmail(payload.Email);
+
+            if (user is null || !BCrypt.Net.BCrypt.Verify(payload.Password, user.Password))
             {
+                throw new UnauthorizedAccessException("Email and/or password is incorrect"); // Custom exception needed!!!
+            }
+            
+
+             var tokenDescriptor = new SecurityTokenDescriptor
+             {
+                 Subject = new ClaimsIdentity(new[]
+                 {
                 new Claim("Id", Guid.NewGuid().ToString()),
-                //new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-                //new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim(JwtRegisteredClaimNames.Sub, "1"),
-                new Claim(JwtRegisteredClaimNames.Email, "user.Email"),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti,
                 Guid.NewGuid().ToString())
-            }),
+             }),
 
-            Expires = DateTime.UtcNow.AddMinutes(_jwtOptions.TtlInMinutes),
-            Issuer = _jwtOptions.Issuer,
-            Audience = _jwtOptions.Audience,
-            SigningCredentials = new SigningCredentials(
-                new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtOptions.Key)),
-                SecurityAlgorithms.HmacSha512Signature)
-        };
+                 Expires = DateTime.UtcNow.AddMinutes(_jwtOptions.TtlInMinutes),
+                 Issuer = _jwtOptions.Issuer,
+                 Audience = _jwtOptions.Audience,
+                 SigningCredentials = new SigningCredentials(
+                     new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtOptions.Key)),
+                     SecurityAlgorithms.HmacSha512Signature)
+             };
 
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var token = tokenHandler.CreateToken(tokenDescriptor);
-        var jwtToken = tokenHandler.WriteToken(token);
-        var stringToken = tokenHandler.WriteToken(token);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var jwtToken = tokenHandler.WriteToken(token);
+            var stringToken = tokenHandler.WriteToken(token);
 
-        return stringToken;
-    }
-    public async Task ChangePassword(ChangePasswordDto payload)
-    {
+            return stringToken;
+        }
+        public async Task ChangePassword(ChangePasswordDto payload)
+        {
+            var stringId = _context.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (stringId is null || !int.TryParse(stringId, out int userId)) throw new UnauthorizedAccessException();
 
-    }
+        var user =await _userRepository.FindById(userId);
+
+        if (user is null) throw new UnauthorizedAccessException();
+
+        await _userRepository.UpdateUserPassword(userId, BCrypt.Net.BCrypt.HashPassword(payload.Password));
+        }
     }
 }

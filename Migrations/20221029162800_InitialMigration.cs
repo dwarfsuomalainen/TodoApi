@@ -34,9 +34,8 @@ namespace TodoApi.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    UserId = table.Column<string>(type: "text", nullable: false),
-                    Status = table.Column<string>(type: "text", nullable: false),
-                    UserId1 = table.Column<int>(type: "integer", nullable: true),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    Status = table.Column<int>(type: "integer", nullable: false),
                     Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
@@ -44,16 +43,17 @@ namespace TodoApi.Migrations
                 {
                     table.PrimaryKey("PK_Todos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Todos_Users_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_Todos_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Todos_UserId1",
+                name: "IX_Todos_UserId",
                 table: "Todos",
-                column: "UserId1");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

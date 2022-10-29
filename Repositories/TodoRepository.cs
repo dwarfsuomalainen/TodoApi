@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TodoApi.Data;
 using TodoApi.Models;
+using TodoApi.Enums;
 
 namespace TodoApi.Repositories
 {
@@ -27,20 +28,26 @@ namespace TodoApi.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Todo> Get(int id)
+       /* public async Task<Todo> Get(int id)
         {
             return await _context.Todos.FindAsync(id);
-        }
+        }*/
 
-        public async Task<IEnumerable<Todo>> GetAll()
+        /*public async Task<IEnumerable<Todo>> GetAll()
         {
             return await _context.Todos.ToListAsync();
-        }
+        }*/
 
         public async Task<Todo?> GetByAuthId(int todoId, int userId)
         {
             return _dbSet.FirstOrDefault(x => x.UserId == userId  && x.Id == todoId);
         }
+
+            public async Task<Todo[]> GetTodos(int userId, TodoStatus? status) // - ? nullable status 
+        {
+            return _dbSet.Where(x => x.UserId == userId && status.HasValue ? x.Status == status.Value: true ).ToArray(); // -returnin an array 
+        }
+        
         
         public async Task Update(Todo todo)
         {
