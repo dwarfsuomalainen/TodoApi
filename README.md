@@ -60,7 +60,19 @@
  ![Screenshot 2022-10-30 at 20 55 15](https://user-images.githubusercontent.com/73884598/198896445-13932549-9c6f-442e-abd9-0f1ff7d6322d.png)
  
  Create a Todo note 
+
  
+ 
+ Get Todos 
+ 
+ In the response body you can see the todo you just posted on the previous step. 
+ 
+ ![Screenshot 2022-10-30 at 21 24 16](https://user-images.githubusercontent.com/73884598/198897601-8ebdae4f-1c6a-425f-9076-a99892c39835.png)
+
+ As you see, there is a sorting by Status implemented in the project. 
+ 
+ ![Screenshot 2022-10-30 at 21 26 47](https://user-images.githubusercontent.com/73884598/198897733-5406e55a-a028-44c2-a7e2-41dced7a454b.png)
+
 
 
  
