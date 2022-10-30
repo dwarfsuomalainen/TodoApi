@@ -11,8 +11,8 @@ namespace TodoApi.Repositories
 {
     public class TodoRepository : BaseRepository<Todo>, ITodoRepository
     {
-        
-        public TodoRepository(ITodoContext context) : base(context, context.Todos){}
+
+        public TodoRepository(ITodoContext context) : base(context, context.Todos) { }
         public async Task Add(Todo todo)
         {
             _context.Todos.Add(todo);
@@ -28,27 +28,27 @@ namespace TodoApi.Repositories
             await _context.SaveChangesAsync();
         }
 
-       /* public async Task<Todo> Get(int id)
-        {
-            return await _context.Todos.FindAsync(id);
-        }*/
+        /* public async Task<Todo> Get(int id) // - this feture for the future version ** - replaced by GetByAuthId ** In current version Todos available only on Athorization
+         {
+             return await _context.Todos.FindAsync(id);
+         }*/
 
-        /*public async Task<IEnumerable<Todo>> GetAll()
+        /*public async Task<IEnumerable<Todo>> GetAll() // replaced by GetTodos method **
         {
             return await _context.Todos.ToListAsync();
         }*/
 
         public async Task<Todo?> GetByAuthId(int todoId, int userId)
         {
-            return _dbSet.FirstOrDefault(x => x.UserId == userId  && x.Id == todoId);
+            return _dbSet.FirstOrDefault(x => x.UserId == userId && x.Id == todoId);
         }
 
-            public async Task<Todo[]> GetTodos(int userId, TodoStatus? status) // - ? nullable status 
+        public async Task<Todo[]> GetTodos(int userId, TodoStatus? status) // - ? nullable status 
         {
-            return _dbSet.Where(x => x.UserId == userId && status.HasValue ? x.Status == status.Value: true ).ToArray(); // -returnin an array 
+            return _dbSet.Where(x => x.UserId == userId && status.HasValue ? x.Status == status.Value : true).ToArray(); // -returnin an array of Todos
         }
-        
-        
+
+
         public async Task Update(Todo todo)
         {
             var todoToUpdate = await _context.Todos.FindAsync(todo.Id);

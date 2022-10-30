@@ -40,12 +40,12 @@ namespace TodoApi.Services
             {
                 throw new UnauthorizedAccessException("Email and/or password is incorrect"); // Custom exception needed!!!
             }
-            
 
-             var tokenDescriptor = new SecurityTokenDescriptor
-             {
-                 Subject = new ClaimsIdentity(new[]
-                 {
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
                 new Claim("Id", Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
@@ -53,13 +53,13 @@ namespace TodoApi.Services
                 Guid.NewGuid().ToString())
              }),
 
-                 Expires = DateTime.UtcNow.AddMinutes(_jwtOptions.TtlInMinutes),
-                 Issuer = _jwtOptions.Issuer,
-                 Audience = _jwtOptions.Audience,
-                 SigningCredentials = new SigningCredentials(
-                     new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtOptions.Key)),
-                     SecurityAlgorithms.HmacSha512Signature)
-             };
+                Expires = DateTime.UtcNow.AddMinutes(_jwtOptions.TtlInMinutes),
+                Issuer = _jwtOptions.Issuer,
+                Audience = _jwtOptions.Audience,
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtOptions.Key)),
+                    SecurityAlgorithms.HmacSha512Signature)
+            };
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -73,11 +73,11 @@ namespace TodoApi.Services
             var stringId = _context.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (stringId is null || !int.TryParse(stringId, out int userId)) throw new UnauthorizedAccessException();
 
-        var user =await _userRepository.FindById(userId);
+            var user = await _userRepository.FindById(userId);
 
-        if (user is null) throw new UnauthorizedAccessException();
+            if (user is null) throw new UnauthorizedAccessException();
 
-        await _userRepository.UpdateUserPassword(userId, BCrypt.Net.BCrypt.HashPassword(payload.Password));
+            await _userRepository.UpdateUserPassword(userId, BCrypt.Net.BCrypt.HashPassword(payload.Password));
         }
     }
 }

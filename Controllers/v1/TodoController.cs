@@ -19,7 +19,7 @@ namespace TodoApi.Controllers.v1
         {
             _todoService = todoService;
         }
-        /*[HttpGet("{id}")]
+        /*[HttpGet("{id}")] // - for future version **
         public async Task<ActionResult<Todo>> GetTodo(int id)
         {
             var todo = await _todoService.GetTodo(id);
