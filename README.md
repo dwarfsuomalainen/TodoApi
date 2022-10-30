@@ -73,10 +73,26 @@
  
  ![Screenshot 2022-10-30 at 21 26 47](https://user-images.githubusercontent.com/73884598/198897733-5406e55a-a028-44c2-a7e2-41dced7a454b.png)
 
-
-
+ Edit a Todo
  
+ ![Screenshot 2022-10-30 at 22 02 46](https://user-images.githubusercontent.com/73884598/198899194-fd85269c-c351-41cc-8983-780f9223e172.png)
+ and check the changes 
+ ![Screenshot 2022-10-30 at 22 03 56](https://user-images.githubusercontent.com/73884598/198899246-0a37cf88-a4a6-49b4-8255-750a2d4e7c07.png)
+
+ Deleting Todo
  
+ ![Screenshot 2022-10-30 at 22 06 59](https://user-images.githubusercontent.com/73884598/198899360-afc890e4-769b-4566-a258-3697d31e0605.png)
+ 
+ and check it was deleted, now api returns empty array, because only object you created now deleted. 
+ 
+ ![Screenshot 2022-10-30 at 22 07 50](https://user-images.githubusercontent.com/73884598/198899414-e67bfffb-1301-4e6b-b48f-f5c9373d3e10.png)
+
+ Changing a password 
+ 
+ ![Screenshot 2022-10-30 at 22 01 45](https://user-images.githubusercontent.com/73884598/198899130-1cc7f220-7f67-4dd8-a34a-b44a215752af.png)
+
+ Unathorized user can not see Todos. 
+ All the exceptions are standart, custom exceptions will be created in future versions of API.
  
  
  
