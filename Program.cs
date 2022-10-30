@@ -1,8 +1,6 @@
 using System.Text.Json.Serialization;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using TodoApi.Data;
-using TodoApi.Models;
 using TodoApi.Repositories;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using TodoApi.Services;
