@@ -1,6 +1,6 @@
-# TodoApi
+# TodoApi :bowtie:
 
- C# and .NET core for Web development assignment 
+ This Api provides back-end for Todo notes application. User required to be authorized befor user can call api.
  
  Clone the repository to your local machine. 
  https://github.com/dwarfsuomalainen/TodoApi.git
@@ -9,9 +9,10 @@
  Check docker-compose.yml and make desirable changes in database settings.
  Use 
  * docker-compose up -d 
- to set up volumes in docker. 
- If no changes needed, use current settings. 
- Go to * http://localhost:5050/login 
+ * (to set up volumes in docker. 
+ If no changes needed, use current settings.) 
+ Go to 
+ * http://localhost:5050/login 
  Use the credentials from docker-compose.yml
  * email : r.bogoudinov@mac.com
  * password : admin1234
