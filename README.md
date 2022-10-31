@@ -7,7 +7,8 @@
  
  You need Doker Desktop to be installed to start up the project. 
  Check docker-compose.yml and make desirable changes in database settings.
- Use docker-compose up -d to set up volumes in docker. 
+ Use * docker-compose up -d 
+ to set up volumes in docker. 
  If no changes needed, use current settings. 
  Go to  http://localhost:5050/login 
  Use the credentials from docker-compose.yml
