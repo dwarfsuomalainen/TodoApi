@@ -12,11 +12,11 @@
  (to set up volumes in docker. 
  If no changes needed, use current settings.)</p> 
  <h4>Go to</h4> 
- *http://localhost:5050/login 
- #Use the credentials from docker-compose.yml
- * email : r.bogoudinov@mac.com
- * password : admin1234
- #Register a server in pgAdmin
+ * http://localhost:5050/login * 
+ <h4>Use the credentials from docker-compose.yml</h4>
+ *email : r.bogoudinov@mac.com *
+ * password : admin1234 *
+ <h4>Register a server in pgAdmin</h4>
  Connection settings:
  * Hostname/address: postgresql_database
  * Port: 5432
