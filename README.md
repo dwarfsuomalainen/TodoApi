@@ -14,7 +14,7 @@
  <h4>Go to</h4> 
  * http://localhost:5050/login * 
  <h4>Use the credentials from docker-compose.yml</h4>
- *email : r.bogoudinov@mac.com *
+ * email : r.bogoudinov@mac.com *
  * password : admin1234 *
  <h4>Register a server in pgAdmin</h4>
  Connection settings:
