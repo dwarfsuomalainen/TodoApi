@@ -7,20 +7,21 @@
  
  You need Doker Desktop to be installed to start up the project. 
  Check docker-compose.yml and make desirable changes in database settings.
- Use * docker-compose up -d 
+ Use 
+ * *docker-compose up -d 
  to set up volumes in docker. 
  If no changes needed, use current settings. 
- Go to  http://localhost:5050/login 
+ Go to *http://localhost:5050/login 
  Use the credentials from docker-compose.yml
- email : r.bogoudinov@mac.com
- password : admin1234
+ *email : r.bogoudinov@mac.com
+ *password : admin1234
  Register a server in pgAdmin
  Connection settings:
- Hostname/address: postgresql_database
- Port: 5432
- Maintanance database: todoDb
- Username: admin
- Password: roma1234
+ *Hostname/address: postgresql_database
+ *Port: 5432
+ *Maintanance database: todoDb
+ *Username: admin
+ *Password: roma1234
  
  ![Screenshot 2022-10-30 at 20 20 02](https://user-images.githubusercontent.com/73884598/198894961-8b381127-dc21-4652-9022-163839d3da55.png)
  
