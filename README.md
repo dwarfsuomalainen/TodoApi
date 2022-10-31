@@ -7,15 +7,16 @@
  
  You need Doker Desktop to be installed to start up the project. 
  Check docker-compose.yml and make desirable changes in database settings.
- Use 
+ #Use 
  * docker-compose up -d 
  (to set up volumes in docker. 
  If no changes needed, use current settings.) 
- * Go to http://localhost:5050/login 
- Use the credentials from docker-compose.yml
+ #Go to 
+ *http://localhost:5050/login 
+ #Use the credentials from docker-compose.yml
  * email : r.bogoudinov@mac.com
  * password : admin1234
- Register a server in pgAdmin
+ #Register a server in pgAdmin
  Connection settings:
  * Hostname/address: postgresql_database
  * Port: 5432
