@@ -7,7 +7,7 @@ TodoAPI provides back-end for Todo application. It requires users to be signed i
  <ul>https://github.com/dwarfsuomalainen/TodoApi.git</ul>
  
  <h3>You need Doker Desktop to be installed to start up the project. </h3>
- <h2>Check docker-compose.yml and make desirable changes in database settings.</h2>
+ <h4>Check docker-compose.yml and make desirable changes in database settings.</h4>
  <h3>Use</h3> 
  <ul><p>docker-compose up -d (to set up volumes in docker.)</p> 
  <p>If no changes needed, use current settings.</p> </ul> 
@@ -27,6 +27,7 @@ TodoAPI provides back-end for Todo application. It requires users to be signed i
  <li>Username: admin</li>
  <li>Password: roma1234</li>
  </ol>
+ 
  ![Screenshot 2022-10-30 at 20 20 02](https://user-images.githubusercontent.com/73884598/198894961-8b381127-dc21-4652-9022-163839d3da55.png)
  
  <p>After setting up the database, use the command 
@@ -41,6 +42,7 @@ TodoAPI provides back-end for Todo application. It requires users to be signed i
  <h3>First SignUp</h3>
  
  <p>Change request json body, or leave it as it apeeared (this is okay for testing) then hit Execute.</p>
+ 
  ![Screenshot 2022-10-30 at 20 40 07](https://user-images.githubusercontent.com/73884598/198895972-87306eb3-ac84-4e5f-9ab6-3c7730832555.png)
  
  <p>Now you need to Sign in, because there is no unauthorized access to view the Todos.</p>
