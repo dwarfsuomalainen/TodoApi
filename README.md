@@ -84,7 +84,9 @@ TodoAPI provides back-end for Todo application. It requires users to be signed i
  <h3>Edit a Todo</h3>
  
  ![Screenshot 2022-10-30 at 22 02 46](https://user-images.githubusercontent.com/73884598/198899194-fd85269c-c351-41cc-8983-780f9223e172.png)
+ 
  <p>and check the changes </p>
+ 
  ![Screenshot 2022-10-30 at 22 03 56](https://user-images.githubusercontent.com/73884598/198899246-0a37cf88-a4a6-49b4-8255-750a2d4e7c07.png)
 
  <h3>Deleting Todo </h3>
