@@ -7,7 +7,7 @@
  
  You need Doker Desktop to be installed to start up the project. 
  Check docker-compose.yml and make desirable changes in database settings.
- <h2>Use</h2> 
+ <h4>Use</h4> 
  * docker-compose up -d 
  (to set up volumes in docker. 
  If no changes needed, use current settings.) 
