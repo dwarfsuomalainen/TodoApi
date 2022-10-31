@@ -1,6 +1,6 @@
-# TodoApi :bowtie:
+# TodoApi 
 
- This Api provides back-end for Todo notes application. User required to be authorized befor user can call api.
+ This Api provides back-end for Todo notes application. User required to be authorized befor user can call api.:bowtie:
  
  Clone the repository to your local machine. 
  https://github.com/dwarfsuomalainen/TodoApi.git
@@ -9,7 +9,7 @@
  Check docker-compose.yml and make desirable changes in database settings.
  Use 
  * docker-compose up -d 
- * (to set up volumes in docker. 
+ (to set up volumes in docker. 
  If no changes needed, use current settings.) 
  Go to 
  * http://localhost:5050/login 
