@@ -1,6 +1,6 @@
 # TodoApi 
 
- This Api provides back-end for Todo notes application. User required to be authorized befor user can call api.:bowtie:
+ This Api provides back-end for Todo notes application. User required to be authorized before user can call api.:bowtie:
  
  Clone the repository to your local machine. 
  https://github.com/dwarfsuomalainen/TodoApi.git
