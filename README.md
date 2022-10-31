@@ -11,8 +11,7 @@
  * docker-compose up -d 
  (to set up volumes in docker. 
  If no changes needed, use current settings.) 
- Go to 
- * http://localhost:5050/login 
+ * Go to http://localhost:5050/login 
  Use the credentials from docker-compose.yml
  * email : r.bogoudinov@mac.com
  * password : admin1234
