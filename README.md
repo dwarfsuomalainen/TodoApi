@@ -8,10 +8,10 @@
  You need Doker Desktop to be installed to start up the project. 
  Check docker-compose.yml and make desirable changes in database settings.
  <h4>Use</h4> 
- * docker-compose up -d 
+ <p>docker-compose up -d 
  (to set up volumes in docker. 
- If no changes needed, use current settings.) 
- #Go to 
+ If no changes needed, use current settings.)</p> 
+ <h4>Go to</h4> 
  *http://localhost:5050/login 
  #Use the credentials from docker-compose.yml
  * email : r.bogoudinov@mac.com
