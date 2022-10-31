@@ -12,7 +12,7 @@
  (to set up volumes in docker. 
  If no changes needed, use current settings.)</p> 
  <h4>Go to</h4> 
- * http://localhost:5050/login * 
+ <ul>http://localhost:5050/login</ul> 
  <h4>Use the credentials from docker-compose.yml</h4>
  * email : r.bogoudinov@mac.com *
  * password : admin1234 *
